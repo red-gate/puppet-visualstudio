@@ -1,5 +1,5 @@
 # Encoding: utf-8
-require_relative '../../../spec_windowshelper'
+require_relative 'spec_windowshelper'
 
 describe package('Microsoft Visual Studio Premium 2012') do
   it { should be_installed}

@@ -1,5 +1,5 @@
 # Encoding: utf-8
-require_relative '../../../spec_windowshelper'
+require_relative 'spec_windowshelper'
 
 # Check for a list of installed package that suggest that the VS install
 # was successfull
