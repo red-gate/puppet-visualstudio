@@ -4,6 +4,8 @@
 class visualstudio::vs2013 {
   include archive
 
+  ensure_resource('file', 'c:/temp', { ensure => directory })
+
   file { 'c:/temp/vs2013':
     ensure  => directory,
     require => File['c:/temp'],
