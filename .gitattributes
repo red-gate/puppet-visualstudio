@@ -5,3 +5,4 @@
 *.ini text eol=crlf
 *.settings text eol=crlf
 *.reg text eol=crlf
+*.xml text eol=crlf
