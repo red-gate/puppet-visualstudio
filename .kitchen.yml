@@ -61,5 +61,6 @@ suites:
   - name: vs2017
     provisioner:
       manifest: vs2017.pp
+      max_retries: 3
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2017_spec.rb
