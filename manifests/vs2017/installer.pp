@@ -1,10 +1,10 @@
 # Setup the Visual Studio 2017 Installer.
-# We currently use the 'Professional' edition installer.
-# (So VS 2017 Professional Core Editor is installed by default.)
-# But we should still be able to install Comunity and Enterprise
+# We currently use the 'Enterprise' edition installer.
+# (So VS 2017 Enterprise Core Editor is installed by default.)
+# But we should still be able to install Comunity and Professional
 # editions side by side.
 define visualstudio::vs2017::installer(
-  $installer_url = 'https://download.microsoft.com/download/A/7/0/A70DA513-34AA-4282-9D43-3E131AB969CC/vs_Professional.exe',
+  $installer_url = 'https://aka.ms/vs/15/release/vs_Enterprise.exe',
   $temp_folder = 'c:/windows/temp',
   $channel_id = 'VisualStudio.15.Release',
   $edition = $title,
