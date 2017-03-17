@@ -17,8 +17,8 @@ define visualstudio::vs2017::installer(
   # Path where the VS installer bootstrapper will be downloaded.
   $installer = inline_template('<%= @temp_folder + "/" + File.basename(@installer_url, ".*") + "_" + @vs_year + ".exe" %>')
 
-  if !member(['Community', 'Professional', 'Enterprise'], $edition) {
-    fail("Unsupported VS ${vs_year} Edition: '${edition}'. Supported values are 'Community', 'Professional', 'Enterprise'")
+  if !member(['Community', 'Professional', 'Enterprise', 'BuildTools'], $edition) {
+    fail("Unsupported VS ${vs_year} Edition: '${edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
   }
   $product_id = "Microsoft.VisualStudio.Product.${edition}"
 

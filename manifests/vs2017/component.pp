@@ -22,8 +22,8 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
     $internal_id = $id
   }
 
-  if !member(['Community', 'Professional', 'Enterprise'], $internal_edition) {
-    fail("Unsupported VS 2017 Edition: '${internal_edition}'. Supported values are 'Community', 'Professional', 'Enterprise'")
+  if !member(['Community', 'Professional', 'Enterprise', 'BuildTools'], $internal_edition) {
+    fail("Unsupported VS 2017 Edition: '${internal_edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
   }
   $product_id = "Microsoft.VisualStudio.Product.${internal_edition}"
 
