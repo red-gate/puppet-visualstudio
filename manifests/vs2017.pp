@@ -11,6 +11,10 @@ class visualstudio::vs2017(
   $editions = ['Professional'],
   $components = ['Microsoft.VisualStudio.Workload.VisualStudioExtension', 'Microsoft.VisualStudio.Component.Web']
   ) {
+  
+  if !$editions.is_a(Array) {
+    fail('The editions parameter expects an array')
+  }
 
   $editions.each |String $edition| {
     # Install VS Core editor for the given edition.
