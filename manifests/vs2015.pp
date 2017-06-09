@@ -32,7 +32,7 @@ class visualstudio::vs2015(
   }
   ->
   exec { 'Install Visual Studio 2015':
-    command => "${vs_install_command} VSU;MicroUpdate;ClickOnce",
+    command => 'vs_professional_2015.exe /norestart /quiet',
     # This DLL is a better indication of a successful install than devenv.exe, as the DLL is installed late in the installation
     creates => "${vs_install_path}/Common7/IDE/Microsoft.VisualStudio.Debugger.dll",
     timeout => 6000, # 100mins to install
