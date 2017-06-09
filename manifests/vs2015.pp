@@ -1,6 +1,6 @@
 # Install and configure VS 2015
 class visualstudio::vs2015(
-  $installer_url = 'https://download.microsoft.com/download/5/8/9/589A8843-BA4D-4E63-BCB2-B2380E5556FD/vs_professional.exe',
+  $installer_url = 'http://go.microsoft.com/fwlink/?LinkID=786520&clcid=0x409',
   $temp_folder = 'c:/windows/temp',
   $install_vcplusplus = true
   ) {
