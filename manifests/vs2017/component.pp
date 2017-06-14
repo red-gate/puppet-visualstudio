@@ -29,7 +29,7 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
 
   $vs_installer_path = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installershell.exe'
 
-  reboot { "Reboot before installing VS 2017 ${edition} ${id} (if pending)":
+  reboot { "Reboot before installing VS 2017 ${internal_edition} ${internal_id} (if pending)":
     when => pending,
   }
   -> exec { "VS 2017: Install component/workload ${internal_id} to ${internal_edition} edition.":
