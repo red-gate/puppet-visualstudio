@@ -29,7 +29,10 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
 
   $vs_installer_path = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installershell.exe'
 
-  exec { "VS 2017: Install component/workload ${internal_id} to ${internal_edition} edition.":
+  reboot { "Reboot before installing VS 2017 ${edition} ${id} (if pending)":
+    when => pending,
+  }
+  -> exec { "VS 2017: Install component/workload ${internal_id} to ${internal_edition} edition.":
     command   => "\$process = Start-Process -FilePath '${vs_installer_path}' \
 -ArgumentList 'modify --productId ${product_id} --channelId ${channel_id} --add ${internal_id} --quiet --norestart' \
 -Wait -PassThru; \
