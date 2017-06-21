@@ -38,26 +38,36 @@ verifier:
 
 suites:
   - name: vs2010
+    excludes:
+      - windows-2016
     provisioner:
       manifest: vs2010.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2010_spec.rb
   - name: vs2012
+    excludes:
+      - windows-2016
     provisioner:
       manifest: vs2012.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2012_spec.rb
   - name: vs2013
+    excludes:
+      - windows-2016
     provisioner:
       manifest: vs2013.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2013_spec.rb
   - name: vs2015
+    excludes:
+      - windows-2016
     provisioner:
       manifest: vs2015.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2015_spec.rb
   - name: vs2015_community
+    excludes:
+      - windows-2016
     provisioner:
       manifest: vs2015_community.pp
     verifier:
