@@ -72,7 +72,7 @@ class visualstudio::vs2015(
     # If we needed to target win xp from VS 2015
     exec { 'Install Visual Studio 2015 XP Support for C++':
       command => "${vs_install_command} NativeLanguageSupport_XP",
-      creates => 'C:/Program Files (x86)/MSBuild/Microsoft.Cpp/v4.0/V140/Platforms/x64/PlatformToolsets/v140_xp/Toolset.targets',
+      creates => 'C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/',
     }
 
     $final_vs_task = Exec['Install Visual Studio 2015 XP Support for C++']
