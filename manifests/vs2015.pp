@@ -68,14 +68,14 @@ class visualstudio::vs2015(
       command => "${vs_install_command} NativeLanguageSupport_MFC",
       creates => "${vs_install_path}/VC/atlmfc/src/mfc/",
     }
-    # ->
-    # # If we needed to target win xp from VS 2015
-    # exec { 'Install Visual Studio 2015 XP Support for C++':
-    #   command => "${install_command} NativeLanguageSupport_XP",
-    #   creates => "${vs_install_path}/??TODO??",
-    # }
+    ->
+    # If we needed to target win xp from VS 2015
+    exec { 'Install Visual Studio 2015 XP Support for C++':
+      command => "${vs_install_command} NativeLanguageSupport_XP",
+      creates => 'C:/Program Files (x86)/MSBuild/Microsoft.Cpp/v4.0/V140/Platforms/x64/PlatformToolsets/v140_xp/Toolset.targets',
+    }
 
-    $final_vs_task = Exec['Install Visual Studio 2015 MFC classes for C++']
+    $final_vs_task = Exec['Install Visual Studio 2015 XP Support for C++']
   } else {
     $final_vs_task = Exec['Install Visual Studio 2015 SSDT']
   }
