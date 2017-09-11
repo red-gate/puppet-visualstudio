@@ -41,14 +41,14 @@ class visualstudio::vs2015(
     command => "${vs_install_command} VSU;MicroUpdate;ClickOnce",
     # This DLL is a better indication of a successful install than devenv.exe, as the DLL is installed late in the installation
     creates => "${vs_install_path}/Common7/IDE/Microsoft.VisualStudio.Debugger.dll",
-    timeout => 6000, # 100mins to install
+    timeout => 12000, # 200mins to install
     returns => [0, 3010],
   }
   ->
   exec { 'Install Visual Studio 2015 SDK':
     command => "${vs_install_command} VS_SDK_GROUP;VS_SDK_Breadcrumb_Group",
     creates => "${vs_install_path}/VSSDK/",
-    timeout => 2400, # 40mins to install
+    timeout => 4800, # 80mins to install
   }
   ->
   exec { 'Install Visual Studio 2015 SSDT':
