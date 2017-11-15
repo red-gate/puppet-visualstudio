@@ -8,7 +8,7 @@
      <SelectableItemCustomization Id="SharepointTools" Hidden="no" Selected="yes"/>
      <SelectableItemCustomization Id="LightSwitch" Hidden="no" Selected="yes"/>
      <SelectableItemCustomization Id="SilverLight_Developer_Kit" Hidden="no" Selected="yes" />
-     <SelectableItemCustomization Id="SQL" Hidden="yes" Selected="no" />
+     <SelectableItemCustomization Id="SQL" Hidden="yes" Selected="yes" />
      <SelectableItemCustomization Id="VC_MFC_Libraries" Hidden="no" Selected="yes" />
      <SelectableItemCustomization Id="Blend" Hidden="no" Selected="yes" />
 
