@@ -10,5 +10,4 @@ end
 
 describe windows_registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment') do
   it { should have_property_value('VISUALSTUDIO_VERSION', :type_string, "2012.0") }
-  it { should have_property_value('SSDT_VERSION', :type_string, "11.0.5583.0") }
 end
