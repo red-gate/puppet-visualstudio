@@ -43,6 +43,4 @@ class visualstudio::vs2012 {
     source          => 'c:/temp/vs2012/SSDT_VS2012.exe',
     install_options => ['/QUIET', '/IACCEPTSQLSERVERLICENSETERMS', '/ACTION=install'],
   }
-  ->
-  windows_env { 'SSDT_VERSION=11.0.5583.0': }
 }
