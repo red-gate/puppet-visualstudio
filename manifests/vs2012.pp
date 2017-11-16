@@ -35,13 +35,13 @@ class visualstudio::vs2012 {
   ->
   windows_env { 'VISUALSTUDIO_VERSION=2012.0': }
   ->
-  archive { 'c:/temp/vs2012/SSDTBI_VS2012_x86_ENU.exe':
-    source => 'https://download.microsoft.com/download/5/C/4/5C4AFD6F-C26F-4E3A-8BE9-8AC43F9039E3/SSDTBI_VS2012_x86_ENU.exe',
+  archive { 'c:/temp/vs2012/SSDT_VS2012.exe':
+    source => 'http://go.microsoft.com/fwlink/?LinkID=617314',
   }
   ->
   # SSDT2012. It does have a unique specific installer entry in add/remove programs, so I'm using the SQL Server 2012 setup as a surrogate.
   package { 'Microsoft SQL Server 2012 Setup (English)':
-    source          => 'c:/temp/vs2012/SSDTBI_VS2012_x86_ENU.exe',
+    source          => 'c:/temp/vs2012/SSDT_VS2012.exe',
     install_options => ['/QUIET', '/IACCEPTSQLSERVERLICENSETERMS', '/ACTION=install'],
   }
   ->
