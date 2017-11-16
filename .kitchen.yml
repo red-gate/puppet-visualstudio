@@ -78,10 +78,11 @@ suites:
       max_retries: 3
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2017_spec.rb
-  - name: buildtools2017
-    provisioner:
-      manifest: buildtools2017.pp
-      max_retries: 1
-      wait_for_retry: 10
-    verifier:
-      command: rspec -c -f d -I spec spec/acceptance/buildtools2017_spec.rb
+  # Disabled since we currently do not deploy Build Tools 2017.
+  # - name: buildtools2017
+  #   provisioner:
+  #     manifest: buildtools2017.pp
+  #     max_retries: 1
+  #     wait_for_retry: 10
+  #   verifier:
+  #     command: rspec -c -f d -I spec spec/acceptance/buildtools2017_spec.rb
