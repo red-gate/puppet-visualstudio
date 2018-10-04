@@ -47,6 +47,7 @@ select -ExpandProperty selectedPackages | \
 where { \$_.id -eq '${internal_id}' -and ('GroupSelected', 'IndividuallySelected') -contains \$_.selectedState }) { exit 1 }",
     provider  => 'powershell',
     logoutput => true,
+    returns   => [0, 3010], # "3010: success, reboot required" is a valid exit code.
   }
 
 }
