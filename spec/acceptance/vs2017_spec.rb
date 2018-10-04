@@ -4,7 +4,8 @@ require_relative 'spec_windowshelper'
 # Check for a list of installed package that suggest that the VS install
 # was successfull
 [
-  'Microsoft Visual Studio 2017'
+  'Visual Studio Community 2017*',
+  'Visual Studio Professional 2017*'
 ].each do |name|
   describe package(name) do
     it { should be_installed }
