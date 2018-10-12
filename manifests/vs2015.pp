@@ -5,11 +5,6 @@ class visualstudio::vs2015(
   $install_vcplusplus = true
   ) {
 
-  if($::os['release']['major'] == '2016') {
-    # We're seeing 'devenv.exe /setup' hang forever on server 2016. :(
-    fail('Installing Visual Studio 2015 on Windows Server 2016 is not supported.')
-  }
-
   include archive
 
   $temp_folder_with_backslash = regsubst($temp_folder, '/', '\\', 'G')
