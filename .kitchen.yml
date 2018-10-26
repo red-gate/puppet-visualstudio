@@ -28,10 +28,10 @@ platforms:
     driver_plugin: vagrant
     driver_config:
       box: red-gate/windows-2012r2
-  - name: windows-2016
+  - name: windows-2019-core
     driver_plugin: vagrant
     driver_config:
-      box: red-gate/windows-2016
+      box: red-gate/windows-2019-core
 
 verifier:
   name: shell
@@ -39,43 +39,45 @@ verifier:
 suites:
   - name: vs2010
     excludes:
-      - windows-2016
+      - windows-2019-core
     provisioner:
       manifest: vs2010.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2010_spec.rb
   - name: vs2012
     excludes:
-      - windows-2016
+      - windows-2019-core
     provisioner:
       manifest: vs2012.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2012_spec.rb
   - name: vs2013
     excludes:
-      - windows-2016
+      - windows-2019-core
     provisioner:
       manifest: vs2013.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2013_spec.rb
   - name: vs2015
     excludes:
-      - windows-2016
+      - windows-2019-core
     provisioner:
       manifest: vs2015.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2015_spec.rb
   - name: vs2015_community
     excludes:
-      - windows-2016
+      - windows-2019-core
     provisioner:
       manifest: vs2015_community.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2015_community_spec.rb
   - name: vs2017
+    excludes:
+      - windows-2012r2
     provisioner:
       manifest: vs2017.pp
-      max_retries: 3
+      max_retries: 5
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2017_spec.rb
   # Disabled since we currently do not deploy Build Tools 2017.
