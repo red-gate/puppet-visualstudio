@@ -35,7 +35,7 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
   }
   -> exec { "VS: Install component/workload ${internal_id}/${channel_id} to ${internal_edition} edition.":
     command   => "\$process = Start-Process -FilePath '${vs_installer_path}' \
--ArgumentList 'modify --productId ${product_id} --channelId ${channel_id} --add ${internal_id} --quiet --norestart' \
+-ArgumentList 'modify', '--productId', '${product_id}', '--channelId', '${channel_id}', '--add', '${internal_id}', '--quiet', '--norestart' \
 -Wait -PassThru; \
 exit \$process.ExitCode",
     timeout   => 1200,
