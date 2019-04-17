@@ -18,12 +18,15 @@ class visualstudio::vs2017(
 
   $editions.each |String $edition| {
     # Install VS Core editor for the given edition.
-    visualstudio::vs2017::installer { $edition: }
+    visualstudio::vsinstaller::installer { $edition:
+      channel_id => 'VisualStudio.15.Release',
+    }
 
     # Install each component to that edition.
     $components.each |String $component| {
-      visualstudio::vs2017::component { "${edition}:${component}":
-        require => Visualstudio::Vs2017::Installer[$edition]
+      visualstudio::vsinstaller::component { "${edition}:${component}":
+        channel_id => 'VisualStudio.15.Release',
+        require    => Visualstudio::Vsinstaller::Installer[$edition]
       }
     }
   }
@@ -32,5 +35,5 @@ class visualstudio::vs2017(
 
   # Only set the environment variable when all the VS components have
   # been successfully installed.
-  Visualstudio::Vs2017::Component <| |> -> Windows_env['VISUALSTUDIO_VERSION=2017']
+  Visualstudio::Vsinstaller::Component <| |> -> Windows_env['VISUALSTUDIO_VERSION=2017']
 }

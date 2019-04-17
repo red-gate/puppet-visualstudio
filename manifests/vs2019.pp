@@ -18,23 +18,22 @@ class visualstudio::vs2019(
 
   $editions.each |String $edition| {
     # Install VS Core editor for the given edition.
-    visualstudio::vs2017::installer { $edition:
-      year          => '2019',
-      installer_url => 'https://download.visualstudio.microsoft.com/download/pr/99e5fb29-6ac9-4f66-8881-56b4d0a413b5/6d157d5ffdd201fb1d59ef8e29a9ce3b/vs_enterprise.exe',
-      channel_id    => 'VisualStudio.16.Release',
+    visualstudio::vsinstaller::installer { $edition:
+      channel_id => 'VisualStudio.16.Release',
     }
 
-    # # Install each component to that edition.
-    # $components.each |String $component| {
-    #   visualstudio::vs2017::component { "${edition}:${component}":
-    #     require => Visualstudio::Vs2017::Installer[$edition]
-    #   }
-    # }
+    # Install each component to that edition.
+    $components.each |String $component| {
+      visualstudio::vsinstaller::component { "${edition}:${component}":
+        channel_id => 'VisualStudio.16.Release',
+        require    => Visualstudio::Vsinstaller::Installer[$edition]
+      }
+    }
   }
 
   windows_env { 'VISUALSTUDIO_VERSION=2019': }
 
   # Only set the environment variable when all the VS components have
   # been successfully installed.
-  Visualstudio::Vs2017::Component <| |> -> Windows_env['VISUALSTUDIO_VERSION=2019']
+  Visualstudio::Vsinstaller::Component <| |> -> Windows_env['VISUALSTUDIO_VERSION=2019']
 }

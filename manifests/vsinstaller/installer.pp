@@ -3,7 +3,7 @@
 # (So VS Enterprise Core Editor is installed by default.)
 # But we should still be able to install Comunity and Professional
 # editions side by side.
-define visualstudio::vs2017::installer(
+define visualstudio::vsinstaller::installer(
   $edition = $title,
   $channel_id = 'VisualStudio.15.Release',
   $temp_folder = 'c:/windows/temp',

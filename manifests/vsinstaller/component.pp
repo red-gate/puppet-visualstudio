@@ -1,5 +1,5 @@
 # Install a given Visual Studio Component/Workload via the Visual Studio installer
-define visualstudio::vs2017::component(
+define visualstudio::vsinstaller::component(
   $edition = undef,
   $id = undef,
   $channel_id = 'VisualStudio.15.Release'
