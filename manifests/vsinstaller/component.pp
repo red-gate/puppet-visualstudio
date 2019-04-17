@@ -43,7 +43,7 @@ exit \$process.ExitCode",
     onlyif    => "if( Resolve-Path C:/ProgramData/Microsoft/VisualStudio/Packages/_Instances/*/state.json | \
 Get-Content -Raw | \
 ConvertFrom-Json | \
-where { \$_.product.id -eq '${product_id}' -and \$.channelId -eq '${channel_id}' } | \
+where { \$_.product.id -eq '${product_id}' -and \$_.channelId -eq '${channel_id}' } | \
 select -ExpandProperty selectedPackages | \
 where { \$_.id -eq '${internal_id}' -and ('GroupSelected', 'IndividuallySelected') -contains \$_.selectedState }) { exit 1 }",
     provider  => 'powershell',
