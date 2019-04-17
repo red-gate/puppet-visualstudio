@@ -59,6 +59,14 @@ suites:
       max_retries: 5
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2017_spec.rb
+  - name: vs2019
+    excludes:
+      - windows-2012r2
+    provisioner:
+      manifest: vs2019.pp
+      max_retries: 5
+    verifier:
+      command: rspec -c -f d -I spec spec/acceptance/vs2019_spec.rb
   # Disabled since we currently do not deploy Build Tools 2017.
   # - name: buildtools2017
   #   provisioner:
