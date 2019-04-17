@@ -1,8 +1,8 @@
 # Install a given Visual Studio Component/Workload via the Visual Studio installer
 define visualstudio::vsinstaller::component(
+  $channel_id,
   $edition = undef,
   $id = undef,
-  $channel_id = 'VisualStudio.15.Release'
   ) {
 
   if $edition == undef or $id == undef {
@@ -39,7 +39,6 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
 -Wait -PassThru; \
 exit \$process.ExitCode",
     timeout   => 1200,
-    # there must be a better way to detect installed components/workloads right? :sweat: :worried:
     onlyif    => "if( Resolve-Path C:/ProgramData/Microsoft/VisualStudio/Packages/_Instances/*/state.json | \
 Get-Content -Raw | \
 ConvertFrom-Json | \

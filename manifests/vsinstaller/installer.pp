@@ -4,8 +4,8 @@
 # But we should still be able to install Comunity and Professional
 # editions side by side.
 define visualstudio::vsinstaller::installer(
+  $channel_id,
   $edition = $title,
-  $channel_id = 'VisualStudio.15.Release',
   $temp_folder = 'c:/windows/temp',
   $custom_install_path = undef
   ) {
