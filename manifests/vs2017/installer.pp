@@ -1,16 +1,26 @@
-# Setup the Visual Studio 2017 Installer.
+# Setup the Visual Studio Installer.
 # We currently use the 'Enterprise' edition installer.
-# (So VS 2017 Enterprise Core Editor is installed by default.)
+# (So VS Enterprise Core Editor is installed by default.)
 # But we should still be able to install Comunity and Professional
 # editions side by side.
 define visualstudio::vs2017::installer(
-  $installer_url = 'https://download.microsoft.com/download/2/5/A/25A04A50-3CB3-495A-ACD0-1C8640A53CA7/vs_Enterprise.exe',
-  $temp_folder = 'c:/windows/temp',
-  $channel_id = 'VisualStudio.15.Release',
   $edition = $title,
-  $year = '2017',
+  $channel_id = 'VisualStudio.15.Release',
+  $temp_folder = 'c:/windows/temp',
   $custom_install_path = undef
   ) {
+
+  $year = $channel_id ? {
+    'VisualStudio.15.Release'  => '2017',
+    'VisualStudio.16.Release'  => '2019',
+    default => fail("Unsupported value '${channel_id}' for the channel_id parameter.")
+  }
+
+  $installer_url = $channel_id ? {
+    'VisualStudio.15.Release'  => 'https://download.microsoft.com/download/2/5/A/25A04A50-3CB3-495A-ACD0-1C8640A53CA7/vs_Enterprise.exe',
+    'VisualStudio.16.Release'  => 'https://download.visualstudio.microsoft.com/download/pr/99e5fb29-6ac9-4f66-8881-56b4d0a413b5/6d157d5ffdd201fb1d59ef8e29a9ce3b/vs_enterprise.exe',
+    default => fail("Unsupported value '${channel_id}' for the channel_id parameter.")
+  }
 
   require archive
 
@@ -35,11 +45,10 @@ define visualstudio::vs2017::installer(
 -Wait -PassThru; \
 exit \$process.ExitCode",
     timeout   => 1200,
-    # there must be a better way to detect installed products right? :sweat: :worried:
     onlyif    => "if( Resolve-Path C:/ProgramData/Microsoft/VisualStudio/Packages/_Instances/*/state.json | \
 Get-Content -Raw | \
 ConvertFrom-Json | \
-where { \$_.product.id -eq '${product_id}' }) { exit 1 }",
+where { \$_.product.id -eq '${product_id}' -and \$_.channelId -eq '${channel_id}' }) { exit 1 }",
     provider  => 'powershell',
     logoutput => true,
     require   => Archive[$installer],
