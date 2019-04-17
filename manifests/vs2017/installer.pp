@@ -8,28 +8,28 @@ define visualstudio::vs2017::installer(
   $temp_folder = 'c:/windows/temp',
   $channel_id = 'VisualStudio.15.Release',
   $edition = $title,
+  $year = '2017',
   $custom_install_path = undef
   ) {
 
   require archive
 
-  $vs_year = '2017'
   # Path where the VS installer bootstrapper will be downloaded.
-  $installer = inline_template('<%= @temp_folder + "/" + File.basename(@installer_url, ".*") + "_" + @vs_year + ".exe" %>')
+  $installer = inline_template('<%= @temp_folder + "/" + File.basename(@installer_url, ".*") + "_" + @year + ".exe" %>')
 
   if !member(['Community', 'Professional', 'Enterprise', 'BuildTools'], $edition) {
-    fail("Unsupported VS ${vs_year} Edition: '${edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
+    fail("Unsupported VS ${year} Edition: '${edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
   }
   $product_id = "Microsoft.VisualStudio.Product.${edition}"
 
   $install_path = $custom_install_path ? {
-    undef   => "C:\\Program Files (x86)\\Microsoft Visual Studio\\${vs_year}\\${edition}",
+    undef   => "C:\\Program Files (x86)\\Microsoft Visual Studio\\${year}\\${edition}",
     default => $custom_install_path,
   }
 
   ensure_resource('archive', $installer, { source => $installer_url })
 
-  exec { "VS ${vs_year}: Install Core product ${product_id}":
+  exec { "VS ${year}: Install Core product ${product_id}":
     command   => "\$process = Start-Process -FilePath '${installer}' \
 -ArgumentList '--installPath \"${install_path}\" --productId ${product_id} --channelId ${channel_id} --quiet --norestart' \
 -Wait -PassThru; \
