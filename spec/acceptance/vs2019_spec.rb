@@ -12,10 +12,10 @@ require_relative 'spec_windowshelper'
   end
 end
 
-describe file('C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Microsoft/VisualStudio/v15.0/Web/Microsoft.Web.Publishing.targets') do
+describe file('C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Microsoft/VisualStudio/v16.0/Web/Microsoft.Web.Publishing.targets') do
   it { should be_file }
 end
 
-describe file('C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Microsoft/VisualStudio/v15.0/Web/Microsoft.Web.Publishing.targets') do
+describe file('C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Microsoft/VisualStudio/v16.0/Web/Microsoft.Web.Publishing.targets') do
   it { should be_file }
 end
