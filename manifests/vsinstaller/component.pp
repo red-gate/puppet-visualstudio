@@ -1,8 +1,8 @@
-# Install a given VS 2017 Component/Workload
-define visualstudio::vs2017::component(
+# Install a given Visual Studio Component/Workload via the Visual Studio installer
+define visualstudio::vsinstaller::component(
+  $channel_id,
   $edition = undef,
   $id = undef,
-  $channel_id = 'VisualStudio.15.Release'
   ) {
 
   if $edition == undef or $id == undef {
@@ -23,27 +23,26 @@ Either format your resource name/title as '<edition>:<component_id>' or use the 
   }
 
   if !member(['Community', 'Professional', 'Enterprise', 'BuildTools'], $internal_edition) {
-    fail("Unsupported VS 2017 Edition: '${internal_edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
+    fail("Unsupported Visual Studop Edition: '${internal_edition}'. Supported values are 'Community', 'Professional', 'Enterprise', 'BuildTools'")
   }
   $product_id = "Microsoft.VisualStudio.Product.${internal_edition}"
 
   $vs_installer_path = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installershell.exe'
 
-  reboot { "Reboot before installing VS 2017 ${internal_edition} ${internal_id} (if pending)":
+  reboot { "Reboot before installing VS ${channel_id} ${internal_edition} ${internal_id} (if pending)":
     when  => pending,
     apply => 'immediately',
   }
-  -> exec { "VS 2017: Install component/workload ${internal_id} to ${internal_edition} edition.":
+  -> exec { "VS: Install component/workload ${internal_id}/${channel_id} to ${internal_edition} edition.":
     command   => "\$process = Start-Process -FilePath '${vs_installer_path}' \
--ArgumentList 'modify --productId ${product_id} --channelId ${channel_id} --add ${internal_id} --quiet --norestart' \
+-ArgumentList 'modify', '--productId', '${product_id}', '--channelId', '${channel_id}', '--add', '${internal_id}', '--quiet', '--norestart' \
 -Wait -PassThru; \
 exit \$process.ExitCode",
     timeout   => 1200,
-    # there must be a better way to detect installed components/workloads right? :sweat: :worried:
     onlyif    => "if( Resolve-Path C:/ProgramData/Microsoft/VisualStudio/Packages/_Instances/*/state.json | \
 Get-Content -Raw | \
 ConvertFrom-Json | \
-where { \$_.product.id -eq '${product_id}' } | \
+where { \$_.product.id -eq '${product_id}' -and \$_.channelId -eq '${channel_id}' } | \
 select -ExpandProperty selectedPackages | \
 where { \$_.id -eq '${internal_id}' -and ('GroupSelected', 'IndividuallySelected') -contains \$_.selectedState }) { exit 1 }",
     provider  => 'powershell',
