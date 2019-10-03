@@ -18,7 +18,7 @@ define visualstudio::vsinstaller::installer(
 
   $installer_url = $channel_id ? {
     'VisualStudio.15.Release'  => 'https://download.microsoft.com/download/2/5/A/25A04A50-3CB3-495A-ACD0-1C8640A53CA7/vs_Enterprise.exe',
-    'VisualStudio.16.Release'  => 'https://download.visualstudio.microsoft.com/download/pr/99e5fb29-6ac9-4f66-8881-56b4d0a413b5/6d157d5ffdd201fb1d59ef8e29a9ce3b/vs_enterprise.exe',
+    'VisualStudio.16.Release'  => 'https://download.visualstudio.microsoft.com/download/pr/02aebac1-9464-4473-9af5-710a97b8f023/7f1ed0c7a0dd03d1e9dfc860a215dea84fe791cf0cd0b8cbe67e78c4cbd0c021/vs_Enterprise.exe',
     default => fail("Unsupported value '${channel_id}' for the channel_id parameter.")
   }
 
