@@ -33,11 +33,11 @@ verifier:
   name: shell
 
 suites:
-  - name: vs2015
-    provisioner:
-      manifest: vs2015.pp
-    verifier:
-      command: rspec -c -f d -I spec spec/acceptance/vs2015_spec.rb
+#   - name: vs2015
+#     provisioner:
+#       manifest: vs2015.pp
+#     verifier:
+#       command: rspec -c -f d -I spec spec/acceptance/vs2015_spec.rb
   - name: vs2017
     provisioner:
       manifest: vs2017.pp
