@@ -24,10 +24,6 @@ transport:
   elevated: true
 
 platforms:
-  - name: windows-2012r2
-    driver_plugin: vagrant
-    driver_config:
-      box: red-gate/windows-2012r2
   - name: windows-2019-core
     driver_plugin: vagrant
     driver_config:
@@ -38,30 +34,17 @@ verifier:
 
 suites:
   - name: vs2015
-    excludes:
-      - windows-2019-core
     provisioner:
       manifest: vs2015.pp
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2015_spec.rb
-  - name: vs2015_community
-    excludes:
-      - windows-2019-core
-    provisioner:
-      manifest: vs2015_community.pp
-    verifier:
-      command: rspec -c -f d -I spec spec/acceptance/vs2015_community_spec.rb
   - name: vs2017
-    excludes:
-      - windows-2012r2
     provisioner:
       manifest: vs2017.pp
       max_retries: 5
     verifier:
       command: rspec -c -f d -I spec spec/acceptance/vs2017_spec.rb
   - name: vs2019
-    excludes:
-      - windows-2012r2
     provisioner:
       manifest: vs2019.pp
       max_retries: 5
